@@ -10,7 +10,6 @@ var program = require('commander')
 // usage
 
 program
-  .version(require('../package').version)
   .usage('<command> [options]');
 
 // sub-command help
@@ -19,7 +18,6 @@ program.on('--help', function(){
   console.log();
   console.log('  # ATEAM - Appcelerator Team CLI Interface');
   console.log();
-  console.log('  ## USAGE');
   console.log('  ateam ticket <number> fix     creates a new git branch for the ticket');
   console.log('  ateam ticket <number> pullreq submit pull request to upstream branch');
   console.log('  ateam ticket <number> close   rm ticket branches and open in jira');
