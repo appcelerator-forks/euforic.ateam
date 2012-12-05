@@ -18,13 +18,13 @@ program.on('--help', function(){
   console.log();
   console.log('  # ATEAM - Appcelerator Team CLI Interface');
   console.log();
-  console.log('  ateam ticket <number> view    view ticket on jira');
-  console.log('  ateam ticket <number> fix     creates a new git branch for the ticket');
-  console.log('  ateam ticket <number> pullreq submit pull request to upstream branch');
-  console.log('  ateam ticket <number> close   rm ticket branches and open in jira');
-  console.log('  ateam ticket <number> review  create a new git branch to review ticket');
-  console.log('  ateam tcase  <ticket> <platform>   creates a mobile web test case');
-  console.log('  ateam tcase  <ticket> done         removes the requested test case');
+  console.log('  ateam ticket <number> view         view ticket on jira');
+  console.log('  ateam ticket <number> fix          creates a new git branch for the ticket');
+  console.log('  ateam ticket <number> pullreq      submit pull request to upstream branch');
+  console.log('  ateam ticket <number> close        rm ticket branches and open in jira');
+  console.log('  ateam ticket <number> review       create a new git branch to review ticket');
+  console.log('  ateam tcase  <number> <platform>   creates a mobile web test case');
+  console.log('  ateam tcase  <number> close        removes the requested test case');
   process.exit();
 });
 

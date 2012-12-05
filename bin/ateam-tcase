@@ -26,7 +26,7 @@ program.usage('<ticket> <platform>');
 
 program.on('--help', function(){
   console.log('  ateam tcase <ticket> <platform>   creates a mobile web test case');
-  console.log('  ateam tcase <ticket> done         removes the requested test case');
+  console.log('  ateam tcase <ticket> close        removes the requested test case');
   console.log();
 });
 
