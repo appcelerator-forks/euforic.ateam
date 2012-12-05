@@ -60,7 +60,7 @@ $ ateam ticket <number> review
 
 ### tcase
 
-Creates a new TI project for to execute test case.
+Creates a new TI project to execute a test case.
 
 ```
 $ ateam tcase <ticket> <platform>
@@ -68,7 +68,7 @@ $ ateam tcase <ticket> <platform>
 
 ### tcase#close
 
-Deletes the TI project generated to execute test case.
+Deletes the TI project generated to execute a test case.
 
 ```
 $ ateam tcase <ticket> <platform>

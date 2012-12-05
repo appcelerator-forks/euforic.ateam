@@ -20,7 +20,7 @@ var TI_PY = env.HOME + '/Library/Application\\ Support/Titanium/mobilesdk/osx/' 
 
 // usage
 
-program.usage('<ticket> <platform>');
+program.usage('ateam tcase <ticket> <platform>');
 
 // examples
 
