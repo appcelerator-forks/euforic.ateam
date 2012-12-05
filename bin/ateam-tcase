@@ -20,13 +20,13 @@ var TI_PY = env.HOME + '/Library/Application\\ Support/Titanium/mobilesdk/osx/' 
 
 // usage
 
-program.usage('ateam tcase <ticket> <platform>');
+program.usage('<ticket> <platform>');
 
 // examples
 
 program.on('--help', function(){
-  console.log('  ateam tcase <ticket> <platform>   creates a mobile web test case');
-  console.log('  ateam tcase <ticket> close        removes the requested test case');
+  console.log('  <ticket> <platform>   creates a mobile web test case');
+  console.log('  <ticket> close        removes the requested test case');
   console.log();
 });
 
