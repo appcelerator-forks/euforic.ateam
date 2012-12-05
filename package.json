@@ -29,6 +29,7 @@
     "wrench": "~1.4.4",
     "colors": "~0.6.0-1",
     "github": "~0.1.7",
-    "commander": "~1.1.1"
+    "commander": "~1.1.1",
+    "shelljs": "0.0.9"
   }
 }
