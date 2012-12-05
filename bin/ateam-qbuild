@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander')
+  , sdkBuilder = require('../lib/sdk-builder');
+
+// usage
+
+program.usage('<platform> [prop]');
+
+// examples
+
+program.on('--help', function(){
+  console.log('  ateam qbuild mobileweb   Build mobile web sdk');
+  console.log();
+});
+
+// parse argv
+
+program.parse(process.argv);
+
+// package
+
+var platform = program.args.shift();
+
+// props
+
+var props = program.args.shift();
+
+require('../lib/sdk-builder');

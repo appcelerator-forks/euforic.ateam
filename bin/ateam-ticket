@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+// inject shelljs to the global scope
+
+require('shelljs/global');
+
+var program = require('commander')
+  , ticket = require('../lib/tickets');
+
+// usage
+
+program.usage('ateam ticket <number>');
+
+// examples
+
+program.on('--help', function(){
+  console.log('  ateam ticket <number> fix     creates a new git branch for the ticket');
+  console.log('  ateam ticket <number> pullreq submit pull request to upstream branch');
+  console.log('  ateam ticket <number> close   rm local & remote git branch for ticket and open ticket in jira');
+  console.log('  ateam ticket <number> review  create a new git branch to review ticket');
+  console.log();
+});
+
+// parse argv
+
+program.parse(process.argv);
+
+// package
+
+var tnumber = program.args.shift();
+
+// props
+
+var task = program.args.shift();
+
+// dynamical call requested ticket function
+
+ticket[task||'fix']( tnumber );
