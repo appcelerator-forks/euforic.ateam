@@ -40,4 +40,10 @@ var task = program.args.shift();
 
 // dynamical call requested ticket function
 
-ticket[task||'fix']( tnumber );
+try{
+  ticket[task||'fix']( tnumber );
+}catch(e){
+  console.log();
+  console.log('  Invalid Command See Usage: ateam ticket --help');
+  console.log();
+}
