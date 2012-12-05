@@ -18,11 +18,11 @@ program.usage('<number> <command>');
 // examples
 
 program.on('--help', function(){
-  console.log('  <number> view    view ticket on jira');
-  console.log('  <number> fix     creates a new git branch for the ticket');
-  console.log('  <number> pullreq submit pull request to upstream branch');
-  console.log('  <number> close   rm ticket git branches and open ticket in jira');
-  console.log('  <number> review  create a new git branch to review ticket');
+  console.log('  view    view ticket on jira');
+  console.log('  fix     creates a new git branch for the ticket');
+  console.log('  pullreq submit pull request to upstream branch');
+  console.log('  close   rm ticket git branches and open ticket in jira');
+  console.log('  review  create a new git branch to review ticket');
   console.log();
 });
 
