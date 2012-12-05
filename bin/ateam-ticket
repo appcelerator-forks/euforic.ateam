@@ -13,11 +13,12 @@ var program = require('commander')
 
 // usage
 
-program.usage('ateam ticket <number>');
+program.usage('ateam ticket <number> <command>');
 
 // examples
 
 program.on('--help', function(){
+  console.log('  ateam ticket <number> view    view ticket on jira');
   console.log('  ateam ticket <number> fix     creates a new git branch for the ticket');
   console.log('  ateam ticket <number> pullreq submit pull request to upstream branch');
   console.log('  ateam ticket <number> close   rm local & remote git branch for ticket and open ticket in jira');
