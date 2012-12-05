@@ -27,7 +27,8 @@ program.usage('<ticket> <platform>');
 program.on('--help', function(){
   console.log('  open     creates a mobile web test case');
   console.log('  close    removes the requested test case');
-  console.log('Defaults to `open` if no command is provided');
+  console.log();
+  console.log('  Defaults to `open` if no command is provided');
   console.log();
 });
 
