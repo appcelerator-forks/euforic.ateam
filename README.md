@@ -1,8 +1,6 @@
 # ATEAM
 ## Appcelerator Team Workflow CLI Tools
 
-Work in progress come back later...
-
 ## Install
 
 ```bash
@@ -13,10 +11,10 @@ $ npm install -g git+https://github.com/euforic/ateam.git
 
 ### Help
 
-Outputs usage
+Outputs usage. Optional command for its usage.
 
 ```bash
-$ ateam --help
+$ ateam [command] --help
 ```
 
 ### ticket#view
@@ -24,7 +22,7 @@ $ ateam --help
 View Ticket on Jira
 
 ```bash
-$ ateam ticket <number> view
+$ ateam ticket view <number>
 ```
 
 ### ticket#fix
@@ -32,15 +30,7 @@ $ ateam ticket <number> view
 Creates a new git branch for the given ticket
 
 ```bash
-$ ateam ticket <number> fix
-```
-
-### ticket#pullreq
-
-Commits current changes and submits pull request to upstream
-
-```bash
-ateam ticket <number> pullreq
+$ ateam ticket fix <number>
 ```
 
 ### ticket#close
@@ -48,15 +38,7 @@ ateam ticket <number> pullreq
 Deletes branches created for ticket and opens up ticket on jira
 
 ```bash
-$ ateam ticket <number> close
-```
-
-### ticket#review
-
-Creates a git branch for ticket codereview
-
-```bash
-$ ateam ticket <number> review
+$ ateam ticket close <number>
 ```
 
 ### tcase
@@ -89,10 +71,10 @@ $ ateam auth <service>
 
 ### pullreq#view
 
-View all open pull requests
+View all open pull requests. To view in browser add the `-b` flag
 
 ```bash
-$ ateam pullreq view <username>/<repo>
+$ ateam pullreq view <username>/<repo> [-b]
 ```
 
 ### pullreq#view
@@ -100,7 +82,7 @@ $ ateam pullreq view <username>/<repo>
 View a certain pull request. To view in browser add the `-b` flag
 
 ```bash
-$ ateam pullreq view <username>/<repo> -n <number> -b
+$ ateam pullreq view <username>/<repo> -n <number> [-b]
 ```
 
 ### pullreq#submit
@@ -117,5 +99,5 @@ Prompt fields:
 - comment : _Pull request ticket comments_
 
 ```bash
-$ ateam pullreq submit
+$ ateam submit pullreq
 ```
