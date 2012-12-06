@@ -8,7 +8,12 @@ require('shelljs/global');
 var program = require('commander')
   , pullreq = require('../lib/pullreq')
   , AVAIL_CMDS = Object.keys(pullreq)
-  , CUR_BRANCH = exec('git rev-parse --abbrev-ref HEAD').output.replace(/\n/, '');
+  , CUR_BRANCH = exec('git rev-parse --abbrev-ref HEAD',{ silent: true} ).output.replace(/\n/, '')
+  , ORIGIN_URL = exec('git config --get remote.origin.url',{ silent: true} ).output.replace(/\n/, '')
+  , REPO_PATH = ORIGIN_URL.replace('https://github.com/', '').replace('.git', '').split('/')
+  , USER = REPO_PATH[0]
+  , PROJECT_NAME = REPO_PATH[1];
+
 
 // usage
 
@@ -17,12 +22,14 @@ program.usage('<platform> [prop]');
 // examples
 
 program.on('--help', function(){
-  console.log('  submit <user>/<repo>                  Submit a pull request');
-  console.log('  view   <user>/<repo>  [optional id]   Shows pull request(s)');
+  console.log('  submit <user>/<repo>            Submit a pull request');
+  console.log('  view   <user>/<repo> [options]  Shows pull request(s)');
   console.log('');
 });
 
-program.option('-i, --id [id]', 'Pull request Id');
+program
+  .option('-n, --num [number]', 'Pull request number')
+  .option('-b, --browser', 'View pull request on github');
 
 // parse argv
 
@@ -46,20 +53,41 @@ switch(command) {
     submitPR(pullreq.submit);
     break;
   case 'view':
-    pullreq.view( repo, program.id||null );
+    if (program.browser) { exec('open https://github.com/' + repo + '/pull/' + program.num); }
+    pullreq.view( repo, program.num||null );
     break;
   default:
     break;
 }
 
+/**
+ * [submitPR description]
+ * @param  {Function} fn [description]
+ * @return {[type]}      [description]
+ */
+
 function submitPR(fn) {
   console.log('\n New Pull Request\n');
   program.prompt({
     title: '  title: ',
-    repo:  '  repo(username/project): ',
+    owner: '  owner: ',
+    repo:  '  repo(' + PROJECT_NAME + '): ',
     head:  '  head branch(' + CUR_BRANCH + '): ',
-    base:  '  base branch: ',
-    body:  '  comment: '
-  },fn);
+    base:  '  base branch(master): ',
+    body:  '  comment(Completed: ' + (new Date()).toDateString() + '): '
+  }, function ( res ) {
 
+    // Set default values for empty responses
+
+    res.user  = res.user  || USER;
+    res.owner = res.owner || '';
+    res.repo  = res.repo  || PROJECT_NAME;
+    res.head  = res.head  || CUR_BRANCH;
+    res.base  = res.base  || 'master';
+    res.body  = res.body  || (new Date()).toDateString();
+    res.repo  = res.repo  || REPO_PATH;
+
+    fn(res);
+
+  });
 }

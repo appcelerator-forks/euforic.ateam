@@ -73,3 +73,36 @@ Deletes the TI project generated to execute a test case.
 ```
 $ ateam tcase <ticket> <platform>
 ```
+
+### pullreq#view
+
+View all open pull requests
+
+```
+$ ateam pullreq view <username>/<repo>
+```
+
+### pullreq#view
+
+View a certain pull request. To view in browser add the `-b` flag
+
+```
+$ ateam pullreq view <username>/<repo> -n <number> -b
+```
+
+### pullreq#submit
+
+Submit a new pull request
+
+Prompt fields:
+
+- title : _Title of pull request_
+- owner : _Repo owner to submit pull request to_
+- repo : _Repo to submit pull request to_
+- head : _Branch to pull in to owners repo_
+- base : _Repo branch to submit pull request to_
+- comment : _Pull request ticket comments_
+
+```
+$ ateam pullreq submit
+```
