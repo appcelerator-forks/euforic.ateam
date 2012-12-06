@@ -29,9 +29,9 @@ program.on('--help', function(){
   console.log();
   console.log('  ATEAM - Appcelerator Team CLI Interface'.bold);
   console.log();
-  console.log('  ticket review <number>      view ticket on jira');
-  console.log('  ticket fix    <number>      creates a new git branch for the ticket');
-  console.log('  ticket close  <number>      rm ticket branches and open in jira');
+  console.log('  ticket view  <number>      view ticket on jira');
+  console.log('  ticket fix   <number>      creates a new git branch for the ticket');
+  console.log('  ticket close <number>      rm ticket branches and open in jira');
   //console.log('  ticket review <number>      create a new git branch to review ticket');
   console.log();
   console.log('  tcase create <number> <platform>  create Ti project for a test case');

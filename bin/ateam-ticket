@@ -33,7 +33,7 @@ program.parse(process.argv);
 
 // package
 
-var task = program.args.shift();
+var command = program.args.shift();
 
 // props
 
@@ -41,11 +41,11 @@ var tnumber = program.args.shift();
 
 // check if command is valid
 
-if ( AVAIL_CMDS.indexOf(task) < 0 ) {
+if ( AVAIL_CMDS.indexOf(command) < 0 ) {
   exec('ateam ticket --help');
   process.exit();
 }
 
 // dynamical call requested ticket function
 
-ticket[cmd]( tnumber );
+ticket[command]( tnumber );
