@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+// inject shelljs to the global scope
+
+require('shelljs/global');
+
+var program = require('commander')
+  , kchain = require('kchain');
+
+// usage
+
+program.usage('<service>');
+
+// examples
+
+program.on('--help', function(){
+  console.log('  Available Services:');
+  console.log('    github');
+  console.log('    jira');
+  console.log();
+  process.exit();
+});
+
+// parse argv
+
+program.parse(process.argv);
+
+// service
+
+var service = program.args.shift();
+
+// check if command is valid
+
+if ( !service ) {
+  exec('ateam auth --help');
+  process.exit();
+}
+
+// Prompt for credentials
+
+program.prompt('\n  Username: ', function(username){
+
+    program.password('  Password: ', '*', function(password){
+
+        kchain.set({
+          account: username,
+          service: 'ateamGithub',
+          password: password
+        });
+
+        process.stdin.destroy();
+      });
+
+  });

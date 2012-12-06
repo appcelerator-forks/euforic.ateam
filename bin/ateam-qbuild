@@ -14,7 +14,7 @@ program.usage('<platform> [prop]');
 // examples
 
 program.on('--help', function(){
-  console.log('  ateam qbuild mobileweb   Build mobile web sdk');
+  console.log('  <platform>   Build mobile web sdk');
   console.log();
 });
 

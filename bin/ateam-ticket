@@ -9,7 +9,8 @@
 require('shelljs/global');
 
 var program = require('commander')
-  , ticket = require('../lib/tickets');
+  , ticket = require('../lib/tickets')
+  , AVAIL_CMDS = Object.keys(ticket);
 
 // usage
 
@@ -24,6 +25,7 @@ program.on('--help', function(){
   console.log('  close   rm ticket git branches and open ticket in jira');
   console.log('  review  create a new git branch to review ticket');
   console.log();
+  process.exit();
 });
 
 // parse argv
@@ -38,12 +40,13 @@ var tnumber = program.args.shift();
 
 var task = program.args.shift();
 
+// check if command is valid
+
+if ( AVAIL_CMDS.indexOf(task) < 0 ) {
+  exec('ateam ticket --help');
+  process.exit();
+}
+
 // dynamical call requested ticket function
 
-try{
-  ticket[task||'fix']( tnumber );
-}catch(e){
-  console.log();
-  console.log('  Invalid Command See Usage: ateam ticket --help');
-  console.log();
-}
+ticket[cmd]( tnumber );

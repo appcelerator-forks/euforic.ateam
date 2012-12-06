@@ -17,19 +17,22 @@
   "author": "Christian Sullivan <csullivan@appcelerator.com>",
   "license": "MIT",
   "readme": "README.md",
-  "bin": {
-    "ateam": "bin/ateam",
-    "ateam-help": "bin/ateam-help",
-    "ateam-tcase": "bin/ateam-tcase",
-    "ateam-ticket": "bin/ateam-ticket",
-    "ateam-qbuild": "bin/ateam-qbuild"
-  },
   "dependencies": {
     "win-spawn": "0.0.0",
     "wrench": "~1.4.4",
     "colors": "~0.6.0-1",
     "github": "~0.1.7",
     "commander": "~1.1.1",
-    "shelljs": "0.0.9"
+    "shelljs": "0.0.9",
+    "kchain": "git+https://github.com/euforic/kchain.git"
+  },
+  "bin": {
+    "ateam": "bin/ateam",
+    "ateam-help": "bin/ateam-help",
+    "ateam-tcase": "bin/ateam-tcase",
+    "ateam-ticket": "bin/ateam-ticket",
+    "ateam-qbuild": "bin/ateam-qbuild",
+    "ateam-pullreq": "bin/ateam-pullreq",
+    "ateam-auth": "bin/ateam-auth"
   }
 }
