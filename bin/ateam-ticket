@@ -14,15 +14,15 @@ var program = require('commander')
 
 // usage
 
-program.usage('<command> <number>');
+program.usage('<command> <ticket-name>');
 
 // examples
 
 program.on('--help', function(){
-  console.log('  view    <number>  view ticket on jira');
-  console.log('  fix     <number>  creates a new git branch for the ticket');
-  console.log('  close   <number>  rm ticket git branches and open ticket in jira');
-  //console.log('  review  <number>  create a new git branch to review ticket');
+  console.log('  view    <ticket-name>  view ticket on jira');
+  console.log('  fix     <ticket-name>  creates a new git branch for the ticket');
+  console.log('  close   <ticket-name>  rm ticket git branches and open ticket in jira');
+  //console.log('  review  <ticket-name>  create a new git branch to review ticket');
   console.log();
   process.exit();
 });

@@ -29,7 +29,7 @@ program.on('--help', function(){
 });
 
 program
-  .option('-n, --num [number]', 'Pull request number')
+  .option('-n, --name <ticket-name>', 'Pull request number')
   .option('-b, --browser', 'View pull request on github');
 
 // parse argv

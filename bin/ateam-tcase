@@ -39,42 +39,43 @@ var ticket = program.args.shift();
 
 var platform = program.args.shift();
 
-// check for platform
-
-if(!platform){ return console.log('\n  [Error]:'.red, ' No platform specified\n'.grey); }
-
 // remove test case project and exit if done
 
 if (command === 'close'){
-  fs.exists('timob-'+ticket, function (exists) {
+  fs.exists(ticket, function (exists) {
     if (exists) {
-      rm('-rf', 'timob-' + ticket);
-      console.log('\n  [TIMOB-' + ticket + ']', 'Test case as been removed\n'.grey);
+      rm('-rf', ticket);
+      console.log('\n  [#' + ticket + ']', 'Test case as been removed\n'.grey);
     } else {
-      console.log('\n  [ERROR]:'.red, '[TIMOB-' + ticket + ']', 'Test case project not found\n'.grey);
+      console.log('\n  [ERROR]:'.red, '[#' + ticket + ']', 'Test case project not found\n'.grey);
     }
     process.exit();
   });
 }
 
-// generate titanium project for test case
 
+if (command === 'open') {
+  // check for platform
 
-fs.exists('timob-'+ticket, function (exists) {
+  if(!platform){ return console.log('\n  [Error]:'.red, ' No platform specified\n'.grey); }
 
-  if (exists) {
-    console.log('\n  [ERROR]:'.red, '[TIMOB-' + ticket + ']', 'Test case already exists\n'.grey);
+  // generate titanium project for test case
+
+  fs.exists(ticket, function (exists) {
+    if (exists) {
+      console.log('\n  [ERROR]:'.red, '[' + ticket + ']', 'Test case already exists\n'.grey);
+      process.exit();
+    }
+
+    var resp = exec('python ' + TI_PY + ' create' +
+      ' --id=' + ticket +
+      ' --name='+ticket +
+      ' --platform=' + platform,
+      { silent: true }
+    ).output.replace('\n', '');
+    // TODO better error checking
+    console.log( (resp !== 'Created mobileweb application project') ? '\n [ERROR]: '.red + resp + '\n' : '\n  ['+ticket+'] ' + 'Test case project created.\n'.grey);
     process.exit();
-  }
 
-  var resp = exec('python ' + TI_PY + ' create' +
-    ' --id=timob-' + ticket +
-    ' --name=timob-'+ticket +
-    ' --platform=' + platform,
-    { silent: true }
-  ).output.replace('\n', '');
-
-  console.log( (!resp) ? ' [ERROR]: '.red  : '\n  [TIMOB-'+ticket+'] ', 'Test case project created.\n'.grey);
-  process.exit();
-
-});
+  });
+}
