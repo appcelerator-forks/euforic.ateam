@@ -4,8 +4,9 @@
 Work in progress come back later...
 
 ## Install
-```
-npm install -g git+https://github.com/euforic/ateam.git
+
+```bash
+$ npm install -g git+https://github.com/euforic/ateam.git
 ```
 
 ## API
@@ -14,7 +15,7 @@ npm install -g git+https://github.com/euforic/ateam.git
 
 Outputs usage
 
-```
+```bash
 $ ateam --help
 ```
 
@@ -22,7 +23,7 @@ $ ateam --help
 
 View Ticket on Jira
 
-```
+```bash
 $ ateam ticket <number> view
 ```
 
@@ -30,7 +31,7 @@ $ ateam ticket <number> view
 
 Creates a new git branch for the given ticket
 
-```
+```bash
 $ ateam ticket <number> fix
 ```
 
@@ -38,7 +39,7 @@ $ ateam ticket <number> fix
 
 Commits current changes and submits pull request to upstream
 
-```
+```bash
 ateam ticket <number> pullreq
 ```
 
@@ -46,7 +47,7 @@ ateam ticket <number> pullreq
 
 Deletes branches created for ticket and opens up ticket on jira
 
-```
+```bash
 $ ateam ticket <number> close
 ```
 
@@ -54,7 +55,7 @@ $ ateam ticket <number> close
 
 Creates a git branch for ticket codereview
 
-```
+```bash
 $ ateam ticket <number> review
 ```
 
@@ -62,7 +63,7 @@ $ ateam ticket <number> review
 
 Creates a new TI project to execute a test case.
 
-```
+```bash
 $ ateam tcase <ticket> <platform>
 ```
 
@@ -70,15 +71,27 @@ $ ateam tcase <ticket> <platform>
 
 Deletes the TI project generated to execute a test case.
 
-```
+```bash
 $ ateam tcase <ticket> <platform>
+```
+
+### auth
+
+Set auth credentials for service
+
+Available Services:
+
+- github
+
+```bash
+$ ateam auth <service>
 ```
 
 ### pullreq#view
 
 View all open pull requests
 
-```
+```bash
 $ ateam pullreq view <username>/<repo>
 ```
 
@@ -86,7 +99,7 @@ $ ateam pullreq view <username>/<repo>
 
 View a certain pull request. To view in browser add the `-b` flag
 
-```
+```bash
 $ ateam pullreq view <username>/<repo> -n <number> -b
 ```
 
@@ -103,6 +116,6 @@ Prompt fields:
 - base : _Repo branch to submit pull request to_
 - comment : _Pull request ticket comments_
 
-```
+```bash
 $ ateam pullreq submit
 ```
