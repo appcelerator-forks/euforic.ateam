@@ -9,26 +9,21 @@
 require('shelljs/global');
 
 var program = require('commander')
-  , exec = require('child_process').exec
-  , fs = require('fs');
-
-// get latest titanium path
-
-var TI_VER = ls(env.HOME + '/Library/Application Support/Titanium/mobilesdk/osx').pop();
-var TI_PY = env.HOME + '/Library/Application\\ Support/Titanium/mobilesdk/osx/' +TI_VER+ '/titanium.py'
+  , fs = require('fs')
+  , colors = require('colors')
+  , TI_VER = ls(env.HOME + '/Library/Application Support/Titanium/mobilesdk/osx').pop()
+  , TI_PY = env.HOME + '/Library/Application\\ Support/Titanium/mobilesdk/osx/' +TI_VER+ '/titanium.py';
 
 
 // usage
 
-program.usage('<ticket> <platform>');
+program.usage('<command> <ticket> <platform>');
 
 // examples
 
 program.on('--help', function(){
-  console.log('  open     creates a mobile web test case');
-  console.log('  close    removes the requested test case');
-  console.log();
-  console.log('  Defaults to `open` if no command is provided');
+  console.log('  open  <number>   creates a new Ti project to for a test case');
+  console.log('  close <number>   removes the requested test case project');
   console.log();
 });
 
@@ -36,37 +31,50 @@ program.on('--help', function(){
 
 program.parse(process.argv);
 
-// package
+// properties
+
+var command = program.args.shift();
 
 var ticket = program.args.shift();
 
-// props
-
 var platform = program.args.shift();
 
-if(!platform){ return console.log('[Error]: No platform specified'); }
+// check for platform
+
+if(!platform){ return console.log('\n  [Error]:'.red, ' No platform specified\n'.grey); }
 
 // remove test case project and exit if done
 
-if (platform === 'close'){
+if (command === 'close'){
   fs.exists('timob-'+ticket, function (exists) {
     if (exists) {
       rm('-rf', 'timob-' + ticket);
-      console.log('[TIMOB-' + ticket + '] Test case as been removed');
+      console.log('\n  [TIMOB-' + ticket + ']', 'Test case as been removed\n'.grey);
     } else {
-      console.log('[ERROR]: [TIMOB-' + ticket + '] Test case project not found')
+      console.log('\n  [ERROR]:'.red, '[TIMOB-' + ticket + ']', 'Test case project not found\n'.grey);
     }
     process.exit();
   });
 }
 
-// create new titanium project for test case
+// generate titanium project for test case
 
-var child = exec('python ' + TI_PY + ' create' +
-  ' --id=timob-' + ticket +
-  ' --name=timob-'+ticket +
-  ' --platform=' + platform,
-function ( code, output ){
-  var resp = (code !== 0) ? output : '[TIMOB-'+ticket+'] Test case project created.';
+
+fs.exists('timob-'+ticket, function (exists) {
+
+  if (exists) {
+    console.log('\n  [ERROR]:'.red, '[TIMOB-' + ticket + ']', 'Test case already exists\n'.grey);
+    process.exit();
+  }
+
+  var resp = exec('python ' + TI_PY + ' create' +
+    ' --id=timob-' + ticket +
+    ' --name=timob-'+ticket +
+    ' --platform=' + platform,
+    { silent: true }
+  ).output.replace('\n', '');
+
+  console.log( (!resp) ? ' [ERROR]: '.red  : '\n  [TIMOB-'+ticket+'] ', 'Test case project created.\n'.grey);
+  process.exit();
+
 });
-

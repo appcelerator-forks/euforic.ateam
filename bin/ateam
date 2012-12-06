@@ -7,7 +7,7 @@
  *  \ '-'  |  |  |  \   --.\ '-'  ||  |  |  |
  *   `--`--'  `--'   `----' `--`--'`--`--`--'
  *
- *       Appcelerator Team Work flow Tools
+ *       Appcelerator Team Work Flow Tools
  */
 
 /**
@@ -15,7 +15,8 @@
  */
 
 var program = require('commander')
-  , spawn = require('win-spawn');
+  , spawn = require('win-spawn')
+  , colors = require('colors');
 
 // usage
 
@@ -26,15 +27,18 @@ program
 
 program.on('--help', function(){
   console.log();
-  console.log('  # ATEAM - Appcelerator Team CLI Interface');
+  console.log('  ATEAM - Appcelerator Team CLI Interface'.bold);
   console.log();
-  console.log('  ticket <number> view         view ticket on jira');
-  console.log('  ticket <number> fix          creates a new git branch for the ticket');
-  console.log('  ticket <number> pullreq      submit pull request to upstream branch');
-  console.log('  ticket <number> close        rm ticket branches and open in jira');
-  console.log('  ticket <number> review       create a new git branch to review ticket');
-  console.log('  tcase  <number> <platform>   creates a mobile web test case');
-  console.log('  tcase  <number> close        removes the requested test case');
+  console.log('  ticket review <number>      view ticket on jira');
+  console.log('  ticket fix    <number>      creates a new git branch for the ticket');
+  console.log('  ticket close  <number>      rm ticket branches and open in jira');
+  //console.log('  ticket review <number>      create a new git branch to review ticket');
+  console.log();
+  console.log('  tcase create <number> <platform>  create Ti project for a test case');
+  console.log('  tcase close  <number>             removes test case project');
+  console.log();
+  console.log('  pullreq submit <user>/<repo>            submit a pull request');
+  console.log('  pullreq view   <user>/<repo> [options]  shows pull request(s)');
   console.log();
   process.exit();
 });

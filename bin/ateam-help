@@ -11,7 +11,7 @@ var program = require('commander')
 
 program.parse(process.argv);
 
-// output --help
+// output available commands
 
 var cmd = program.args[0]
   ? 'ateam ' + program.args[0] + ' --help'

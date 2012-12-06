@@ -14,16 +14,15 @@ var program = require('commander')
 
 // usage
 
-program.usage('<number> <command>');
+program.usage('<command> <number>');
 
 // examples
 
 program.on('--help', function(){
-  console.log('  view    view ticket on jira');
-  console.log('  fix     creates a new git branch for the ticket');
-  console.log('  pullreq submit pull request to upstream branch');
-  console.log('  close   rm ticket git branches and open ticket in jira');
-  console.log('  review  create a new git branch to review ticket');
+  console.log('  view    <number>  view ticket on jira');
+  console.log('  fix     <number>  creates a new git branch for the ticket');
+  console.log('  close   <number>  rm ticket git branches and open ticket in jira');
+  //console.log('  review  <number>  create a new git branch to review ticket');
   console.log();
   process.exit();
 });
@@ -34,11 +33,11 @@ program.parse(process.argv);
 
 // package
 
-var tnumber = program.args.shift();
+var task = program.args.shift();
 
 // props
 
-var task = program.args.shift();
+var tnumber = program.args.shift();
 
 // check if command is valid
 

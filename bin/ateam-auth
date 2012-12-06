@@ -9,7 +9,8 @@
 require('shelljs/global');
 
 var program = require('commander')
-  , kchain = require('kchain');
+  , kchain = require('kchain')
+  , colors = require('colors');
 
 // usage
 
@@ -19,8 +20,7 @@ program.usage('<service>');
 
 program.on('--help', function(){
   console.log('  Available Services:');
-  console.log('    github');
-  console.log('    jira');
+  console.log('  - github');
   console.log();
   process.exit();
 });
@@ -40,11 +40,11 @@ if ( !service ) {
   process.exit();
 }
 
-// Prompt for credentials
+// prompt for credentials
+console.log('\n  [Github Login]'.grey);
+program.prompt('\n  username: ', function(username){
 
-program.prompt('\n  Username: ', function(username){
-
-    program.password('  Password: ', '*', function(password){
+    program.password('  password: ', '*', function(password){
 
         kchain.set({
           account: username,

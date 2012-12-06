@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+
 require('shelljs/global');
 
 var program = require('commander')
@@ -35,25 +36,29 @@ program
 
 program.parse(process.argv);
 
-// package
+// props
 
 var command = program.args.shift();
 
-// props
-
 var repo = program.args.shift();
 
-if ( AVAIL_CMDS.indexOf(command) < 0 ) {
+
+// check command exists
+
+if ( AVAIL_CMDS.indexOf(command) < 0 || !repo ) {
   exec('ateam pullreq --help');
   process.exit();
 }
+
+// execute command
 
 switch(command) {
   case 'submit':
     submitPR(pullreq.submit);
     break;
   case 'view':
-    if (program.browser) { exec('open https://github.com/' + repo + '/pull/' + program.num); }
+    var req = (program.num) ? '/' + program.num : 's/';
+    if (program.browser) { exec('open https://github.com/' + repo + '/pull' + req ); }
     pullreq.view( repo, program.num||null );
     break;
   default:
@@ -61,9 +66,10 @@ switch(command) {
 }
 
 /**
- * [submitPR description]
- * @param  {Function} fn [description]
- * @return {[type]}      [description]
+ * submitPR
+ * @param  {Function} fn
+ * @return null
+ * @api private
  */
 
 function submitPR(fn) {
@@ -87,7 +93,7 @@ function submitPR(fn) {
     res.body  = res.body  || (new Date()).toDateString();
     res.repo  = res.repo  || REPO_PATH;
 
+    // execute callback
     fn(res);
-
   });
 }
