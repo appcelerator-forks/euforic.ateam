@@ -16,10 +16,15 @@ var program = require('commander')
 
 program.usage('<command> <ticket-name>');
 
+// options
+
+program
+  .option('-g, --gh <gh-user/gh-project>', 'view ticket on github');
+
 // examples
 
 program.on('--help', function(){
-  console.log('  view    <ticket-name>  view ticket on jira');
+  console.log('  view    <ticket-name>  view ticket on jira or github with `-g` flag');
   console.log('  fix     <ticket-name>  creates a new git branch for the ticket');
   console.log('  close   <ticket-name>  rm ticket git branches and open ticket in jira');
   //console.log('  review  <ticket-name>  create a new git branch to review ticket');
@@ -48,4 +53,4 @@ if ( AVAIL_CMDS.indexOf(command) < 0 ) {
 
 // dynamical call requested ticket function
 
-ticket[command]( tnumber );
+ticket[command]( tnumber, program.gh );

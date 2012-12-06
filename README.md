@@ -19,10 +19,10 @@ $ ateam [command] --help
 
 ### ticket#view
 
-View Ticket on Jira
+View Ticket on Jira or Github with `-g` flag
 
 ```bash
-$ ateam ticket view <number>
+$ ateam ticket view <ticket-name> [-g]
 ```
 
 ### ticket#fix
@@ -30,7 +30,7 @@ $ ateam ticket view <number>
 Creates a new git branch for the given ticket
 
 ```bash
-$ ateam ticket fix <number>
+$ ateam ticket fix <ticket-name>
 ```
 
 ### ticket#close
@@ -38,7 +38,7 @@ $ ateam ticket fix <number>
 Deletes branches created for ticket and opens up ticket on jira
 
 ```bash
-$ ateam ticket close <number>
+$ ateam ticket close <ticket-name>
 ```
 
 ### tcase
@@ -46,7 +46,7 @@ $ ateam ticket close <number>
 Creates a new TI project to execute a test case.
 
 ```bash
-$ ateam tcase <ticket> <platform>
+$ ateam tcase <ticket-name> <platform>
 ```
 
 ### tcase#close
@@ -54,7 +54,7 @@ $ ateam tcase <ticket> <platform>
 Deletes the TI project generated to execute a test case.
 
 ```bash
-$ ateam tcase <ticket> <platform>
+$ ateam tcase <ticket-name> <platform>
 ```
 
 ### auth
@@ -82,7 +82,7 @@ $ ateam pullreq view <username>/<repo> [-b]
 View a certain pull request. To view in browser add the `-b` flag
 
 ```bash
-$ ateam pullreq view <username>/<repo> -n <number> [-b]
+$ ateam pullreq view <username>/<repo> -n <ticket-name> [-b]
 ```
 
 ### pullreq#submit
