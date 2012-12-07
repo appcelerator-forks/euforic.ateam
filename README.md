@@ -46,7 +46,7 @@ $ ateam ticket close <ticket-name>
 Creates a new TI project to execute a test case.
 
 ```bash
-$ ateam tcase <ticket-name> <platform>
+$ ateam tcase <ticket-name> [-p --platform] <platform>
 ```
 
 ### tcase#close
@@ -54,7 +54,7 @@ $ ateam tcase <ticket-name> <platform>
 Deletes the TI project generated to execute a test case.
 
 ```bash
-$ ateam tcase <ticket-name> <platform>
+$ ateam tcase <ticket-name> [-p] <platform>
 ```
 
 ### auth
