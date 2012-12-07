@@ -34,7 +34,7 @@ program.on('--help', function(){
   console.log('  ticket close <ticket-name>      rm ticket branches and open in jira');
   //console.log('  ticket review <ticket-name>      create a new git branch to review ticket');
   console.log();
-  console.log('  tcase open   <ticket-name> <platform>  create Ti project for a test case');
+  console.log('  tcase open   <ticket-name> [options]   create Ti project for a test case');
   console.log('  tcase close  <ticket-name>             removes test case project');
   console.log();
   console.log('  pullreq submit <user>/<repo>            submit a pull request');
