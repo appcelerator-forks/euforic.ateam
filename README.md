@@ -3,6 +3,15 @@
 
 ## Install
 
+
+NPM Stable version
+
+```bash
+$ npm install -g ateam
+```
+
+Bleeding edge version
+
 ```bash
 $ npm install -g git+https://github.com/euforic/ateam.git
 ```
