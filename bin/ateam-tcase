@@ -11,19 +11,23 @@ require('shelljs/global');
 var program = require('commander')
   , fs = require('fs')
   , colors = require('colors')
-  , TI_VER = ls(env.HOME + '/Library/Application Support/Titanium/mobilesdk/osx').pop()
-  , TI_PY = env.HOME + '/Library/Application\\ Support/Titanium/mobilesdk/osx/' +TI_VER+ '/titanium.py';
+  , TI_VER = ls(env.HOME + '/Library/Application Support/Titanium/mobilesdk/osx').pop();
 
 
 // usage
 
-program.usage('<command> <ticket> <platform>');
+program.usage('<command> <ticket-name> <platform>');
+
+// options
+
+program
+  .option('-p, --platform [ios, iphone, ipad, android, mobileweb]', 'project platforms');
 
 // examples
 
 program.on('--help', function(){
-  console.log('  open  <number>   creates a new Ti project to for a test case');
-  console.log('  close <number>   removes the requested test case project');
+  console.log('  open  <ticket-name>   creates a new Ti project to for a test case');
+  console.log('  close <ticket-name>   removes the requested test case project');
   console.log();
 });
 
@@ -37,7 +41,7 @@ var command = program.args.shift();
 
 var ticket = program.args.shift();
 
-var platform = program.args.shift();
+var platform = program.platform;
 
 // remove test case project and exit if done
 
@@ -45,11 +49,11 @@ if (command === 'close'){
   fs.exists(ticket, function (exists) {
     if (exists) {
       rm('-rf', ticket);
-      console.log('\n  [#' + ticket + ']', 'Test case as been removed\n'.grey);
+      console.log(('\n  [#'+ticket.toUpperCase()+'] ').green, 'Test case as been removed\n'.grey);
     } else {
-      console.log('\n  [ERROR]:'.red, '[#' + ticket + ']', 'Test case project not found\n'.grey);
+      console.error('\n  [ERROR]:'.red, '[#' + ticket + ']', 'Test case project not found\n'.grey);
     }
-    process.exit();
+    process.exit((exists) ? 126 : 0);
   });
 }
 
@@ -57,25 +61,34 @@ if (command === 'close'){
 if (command === 'open') {
   // check for platform
 
-  if(!platform){ return console.log('\n  [Error]:'.red, ' No platform specified\n'.grey); }
+  if(!platform){
+    console.error('\n  [Error]:'.red, ' No platform specified\n'.grey);
+    process.exit(126);
+  }
 
   // generate titanium project for test case
 
   fs.exists(ticket, function (exists) {
     if (exists) {
-      console.log('\n  [ERROR]:'.red, '[' + ticket + ']', 'Test case already exists\n'.grey);
-      process.exit();
+      console.error('\n  [ERROR]:'.red, '[' + ticket + ']', 'Test case already exists\n'.grey);
+      process.exit(126);
     }
 
-    var resp = exec('python ' + TI_PY + ' create' +
-      ' --id=' + ticket +
-      ' --name='+ticket +
-      ' --platform=' + platform,
-      { silent: true }
-    ).output.replace('\n', '');
+    var resp = exec('ti create' +
+      ' --id ' + ticket +
+      ' --name ' + ticket +
+      ' --platforms ' + platform +
+      ' --workspace-dir ./',
+      { silent : true }
+    );
     // TODO better error checking
-    console.log( (resp !== 'Created mobileweb application project') ? '\n [ERROR]: '.red + resp + '\n' : '\n  ['+ticket+'] ' + 'Test case project created.\n'.grey);
-    process.exit();
-
+    console.log((resp.code) ? ('\n  [ERROR]: '.red + ' Test case not created.\n\n'.grey + (resp.output).grey) : ('\n  [#'+ticket.toUpperCase()+'] ').green + 'Test case project created.\n'.grey);
+    process.exit(resp.code);
   });
 }
+
+
+// output error for invalid command
+console.error('\n  [ERROR]: '.red, 'Invalid command.');
+process.stdout.write(program.helpInformation());
+process.exit(127);

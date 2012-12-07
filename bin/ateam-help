@@ -5,6 +5,7 @@
  */
 
 var program = require('commander')
+  , colors = reuire('colors')
   , exec = require('child_process').exec;
 
 // parse argv
@@ -18,6 +19,10 @@ var cmd = program.args[0]
   : 'ateam --help';
 
 exec(cmd, function(err, stdout){
-  if (err) throw err;
+  if (err) {
+    console.error('\n  [ERROR]: '.red, 'Invalid command.'.grey);
+    process.stdout.write(program.helpInformation());
+    process.exit(127);
+  }
   process.stdout.write(stdout);
 });

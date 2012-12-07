@@ -36,8 +36,9 @@ var service = program.args.shift();
 // check if command is valid
 
 if ( !service ) {
-  exec('ateam auth --help');
-  process.exit();
+  console.error('\n  [ERROR]: '.red, 'Invalid command.');
+  process.stdout.write(program.helpInformation());
+  process.exit(127);
 }
 
 // prompt for credentials

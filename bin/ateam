@@ -56,9 +56,9 @@ var args = process.argv.slice(3);
 var cmd = program.args[0];
 
 if (!cmd) {
+  console.error('\n  [ERROR]: '.red, 'Invalid command.');
   process.stdout.write(program.helpInformation());
-  program.emit('--help');
-  process.exit();
+  process.exit(127);
 }
 
 // executable

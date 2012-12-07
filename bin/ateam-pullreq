@@ -8,6 +8,7 @@ require('shelljs/global');
 
 var program = require('commander')
   , pullreq = require('../lib/pullreq')
+  , colors = require('colors')
   , AVAIL_CMDS = Object.keys(pullreq)
   , CUR_BRANCH = exec('git rev-parse --abbrev-ref HEAD',{ silent: true} ).output.replace(/\n/, '')
   , ORIGIN_URL = exec('git config --get remote.origin.url',{ silent: true} ).output.replace(/\n/, '')
@@ -46,8 +47,9 @@ var repo = program.args.shift();
 // check command exists
 
 if ( AVAIL_CMDS.indexOf(command) < 0 || !repo ) {
-  exec('ateam pullreq --help');
-  process.exit();
+  console.error('\n  [ERROR]: '.red, 'Invalid command.');
+  process.stdout.write(program.helpInformation());
+  process.exit(127);
 }
 
 // execute command

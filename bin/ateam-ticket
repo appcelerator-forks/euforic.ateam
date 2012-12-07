@@ -9,6 +9,7 @@
 require('shelljs/global');
 
 var program = require('commander')
+  , colors = require('colors')
   , ticket = require('../lib/tickets')
   , AVAIL_CMDS = Object.keys(ticket);
 
@@ -47,8 +48,9 @@ var tnumber = program.args.shift();
 // check if command is valid
 
 if ( AVAIL_CMDS.indexOf(command) < 0 ) {
-  exec('ateam ticket --help');
-  process.exit();
+  console.error('\n  [ERROR]: '.red, 'Invalid command.');
+  process.stdout.write(program.helpInformation());
+  process.exit(127);
 }
 
 // dynamical call requested ticket function
