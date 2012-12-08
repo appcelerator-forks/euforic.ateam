@@ -87,8 +87,9 @@ if (command === 'open') {
   });
 }
 
-
-// output error for invalid command
-console.error('\n  [ERROR]: '.red, 'Invalid command.');
-process.stdout.write(program.helpInformation());
-process.exit(127);
+if (command !== 'open' && command !== 'close') {
+  // output error for invalid command
+  console.error('\n  [ERROR]: '.red, 'Invalid command.');
+  process.stdout.write(program.helpInformation());
+  process.exit(127);
+}
