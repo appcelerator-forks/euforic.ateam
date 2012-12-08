@@ -50,6 +50,25 @@ Deletes branches created for ticket and opens up ticket on jira
 $ ateam ticket close <ticket-name>
 ```
 
+### sdk#build
+
+Builds the titanium sdk from source
+
+```
+Options:
+
+  -h, --help          output usage information
+  -v, --vname <name>  set version name
+  -i, --ios           build ios sdk
+  -a, --android       build android sdk and v8
+  -w, --mobileweb     builds mobileweb sdk
+  -j, --jsca          generate jsca for docs
+  -f, --full          build all flags
+```
+```bash
+$ ateam sdk build [options]
+```
+
 ### tcase
 
 Creates a new TI project to execute a test case.

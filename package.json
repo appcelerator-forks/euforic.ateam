@@ -33,7 +33,7 @@
     "ateam-help": "bin/ateam-help",
     "ateam-tcase": "bin/ateam-tcase",
     "ateam-ticket": "bin/ateam-ticket",
-    "ateam-qbuild": "bin/ateam-qbuild",
+    "ateam-sdk": "bin/ateam-sdk",
     "ateam-pullreq": "bin/ateam-pullreq",
     "ateam-auth": "bin/ateam-auth"
   }

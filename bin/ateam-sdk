@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander')
+  , sdk = require('../lib/sdk')
+  , colors = require('colors')
+  , AVAIL_CMDS = Object.keys(sdk);
+
+// usage
+
+program.usage('<command> [opts]');
+
+program
+  .option('-v, --vname <name>', 'set version name')
+  .option('-i, --ios', 'build ios sdk')
+  .option('-a, --android', 'build android sdk and v8')
+  .option('-w, --mobileweb', 'builds mobileweb sdk')
+  .option('-j, --jsca', 'generate jsca for docs')
+  .option('-f, --full', 'build all flags');
+
+// parse argv
+
+program.parse(process.argv);
+
+var command = program.args.shift();
+
+// ensure valid command
+
+if ( AVAIL_CMDS.indexOf(command) < 0 ) {
+  console.error('\n  [ERROR]: '.red, 'Invalid command.');
+  process.stdout.write(program.helpInformation());
+  process.exit(127);
+}
+
+// dynamical call requested ticket function
+
+sdk[command]( program );
