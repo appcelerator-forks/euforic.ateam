@@ -1,13 +1,15 @@
 {
   "name": "ateam",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Appcelerator Team Workflow Tools",
   "author": "Christian Sullivan <csullivan@appcelerator.com>",
   "license": "MIT",
   "readme": "README.md",
   "repository": "https://github.com/euforic/ateam.git",
-  "os" : [ "darwin" ],
-  "preferGlobal" : true,
+  "os": [
+    "darwin"
+  ],
+  "preferGlobal": true,
   "keywords": [
     "appcelerator",
     "team",
