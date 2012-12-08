@@ -1,6 +1,6 @@
 # ATEAM
 ## Appcelerator Team Workflow CLI Tools
-
+![](https://dl.dropbox.com/s/lppicpcw5i2boa3/ATeamFull.png)
 ## Install
 
 
